@@ -1,95 +1,123 @@
-<<<<<<< HEAD
-# Portfolio · Pol Gautier
+# Personal Portfolio — Pol Gautier
 
-Sitio estático con **Astro + TypeScript + CSS**, sin backend, sin analítica ni servicios externos (fuentes del sistema, sin CDN). Desplegable gratis en GitHub Pages.
-
-## Ejecutar en local
-```bash
-npm install
-npm run dev      # http://localhost:4321
-npm run build    # comprueba tipos y genera /dist
-npm run preview
-```
-Requiere Node 18.20+ (recomendado 20).
-
-## Personalizar (todo en archivos editables)
-| Qué | Dónde |
-|---|---|
-| Nombre, enlaces, disponibilidad | `src/config.ts` (deja `''` para ocultar un enlace) |
-| Tecnologías y su nivel (proyectos / académico / aprendiendo) | `src/data/skills.ts` |
-| Formación y trayectoria | `src/data/timeline.ts` (`hidden: true` oculta una entrada) |
-| Proyectos | `src/content/projects/*.md` (`draft: true` los oculta) |
-| Write-ups | `src/content/writeups/*.md` (imágenes en `public/img/`) |
-| Colores | variables al inicio de `src/styles/global.css` |
-
-Pendiente de completar: LinkedIn y correo (`src/config.ts`), repositorio y estado de `HoneyPot-IDS-IPS`, problema y tu contribución, y el write-up de ejemplo (es solo plantilla). Cuando confirmes tu disponibilidad, pon `availability.enabled: true`.
-
-## Publicar en GitHub Pages
-1. Crea un repositorio en GitHub. Si se llama `polodemanzana.github.io`, la web quedará en `https://polodemanzana.github.io` y no cambias nada. Si usa otro nombre (ej. `portfolio`), en `astro.config.mjs` pon `base: '/portfolio'`.
-2. Sube el código:
-```bash
-git init && git add . && git commit -m "Primera versión del portfolio"
-git branch -M main
-git remote add origin https://github.com/Polodemanzana/NOMBRE-REPO.git
-git push -u origin main
-```
-3. En GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-4. Cada `git push` a `main` ejecuta `.github/workflows/deploy.yml` y publica. Revisa la pestaña **Actions**.
-
-## Seguridad
-Sin secretos ni formularios; `.gitignore` excluye `.env` y claves. No publiques datos internos de tu empresa de prácticas.
-=======
-# Personal Portfolio
-
-Personal portfolio website built with **Astro** and **TypeScript**, showcasing my journey in IT, systems administration, and cybersecurity.
+A personal portfolio built with **Astro, TypeScript, and CSS**, showcasing my journey in IT, systems administration, networking, and cybersecurity.
 
 The website brings together my technical projects, hands-on labs, and cybersecurity write-ups in one place.
 
+Designed as a lightweight static website, with no backend, analytics, or external runtime services.
+
 ## Features
 
-- Responsive, dark-themed design
+- Responsive design with a dark, minimalist aesthetic
 - Projects and technical write-ups
 - Skills and technologies overview
-- Personal introduction and career timeline
-- Static site built with Astro
-- Deployment support through GitHub Actions
+- Education and career timeline
+- Customizable content through Markdown and TypeScript
+- Automated deployment workflow for GitHub Pages
 
 ## Tech Stack
 
 - [Astro](https://astro.build/)
 - TypeScript
 - HTML and CSS
+- Markdown
+- Git and GitHub Actions
 - GitHub Pages
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js
+- Node.js 20 (recommended)
 - npm
 
 ### Installation
 
+Clone the repository and install the dependencies:
+
 ```bash
-git clone https://github.com/Polodemanzana/portfolio.git
-cd portfolio
+git clone https://github.com/Polodemanzana/Polodemanzana.github.io.git
+cd Polodemanzana.github.io
 npm install
+```
+
+Start the local development server:
+
+```bash
 npm run dev
 ```
 
-Open the local URL shown in the terminal to preview the website.
+Open the local URL displayed in the terminal, usually `http://localhost:4321`.
 
 ### Build
+
+Check the project and generate the production build:
 
 ```bash
 npm run build
 ```
 
-The generated website will be available in the `dist/` directory.
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+The generated website is available in the `dist/` directory.
+
+## Project Structure
+
+```text
+src/
+├── content/
+│   ├── projects/
+│   └── writeups/
+├── data/
+│   ├── skills.ts
+│   └── timeline.ts
+├── styles/
+└── config.ts
+
+public/
+.github/
+└── workflows/
+```
+
+## Customization
+
+Most of the portfolio content can be edited without changing the site's core components.
+
+| Content | Location |
+|---|---|
+| Personal details and links | `src/config.ts` |
+| Skills and technologies | `src/data/skills.ts` |
+| Education and experience | `src/data/timeline.ts` |
+| Projects | `src/content/projects/` |
+| Technical write-ups | `src/content/writeups/` |
+| Global styles and colors | `src/styles/global.css` |
+
+Review placeholder content before publishing and ensure that all project descriptions accurately reflect your own work and contributions.
 
 ## Deployment
 
-The project is configured for deployment using GitHub Actions. Check the repository workflow and Astro configuration before publishing.
+This repository is intended to be published through **GitHub Pages**.
+
+1. Open the repository's **Settings → Pages**.
+2. Select **GitHub Actions** as the deployment source.
+3. Check the workflow in `.github/workflows/deploy.yml`.
+4. Push your changes to `main`.
+5. Check the **Actions** tab to verify that the build and deployment succeed.
+
+The expected website URL is:
+
+**https://polodemanzana.github.io/**
+
+## Security
+
+- Do not commit API keys, passwords, tokens, or other secrets.
+- Keep local environment files out of version control.
+- Do not publish confidential information from internships, employers, or client environments.
+- Use sanitized examples and lab environments for security write-ups.
 
 ## Author
 
@@ -98,4 +126,3 @@ The project is configured for deployment using GitHub Actions. Check the reposit
 Interested in cybersecurity, systems administration, networking, and infrastructure.
 
 - GitHub: [@Polodemanzana](https://github.com/Polodemanzana)
->>>>>>> origin/main
