@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Terminal from '../components/Terminal.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { SITE } from '../config';
+import { skills, LEVEL_LABEL } from '../data/skills';
+import { timeline } from '../data/timeline';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const projects = (await getCollection('projects')).filter((p) => !p.data.draft).sort((a, b) => a.data.order - b.data.order);
+const events = timeline.filter((e) => !e.hidden);
+const { github, linkedin, email } = SITE.links;
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        {SITE.availability.enabled && <p class="avail"><i aria-hidden="true"></i>{SITE.availability.text}</p>}
+        <p class="eyebrow">{SITE.name}</p>
+        <h1>Systems &amp;<br /><em>Cybersecurity</em></h1>
+        <p class="lead">Estudio administración de sistemas y redes, y oriento mi aprendizaje a la seguridad defensiva: infraestructura, monitorización y laboratorios propios.</p>
+        <div class="btns">
+          <a class="btn primary" href={`${base}/#proyectos`}>Ver proyectos</a>
+          {github && <a class="btn" href={github} rel="noopener noreferrer">GitHub ↗</a>}
+        </div>
+      </div>
+      <Terminal />
+    </div>
+  </section>
+
+  <section id="sobre-mi"><div class="wrap">
+    <p class="eyebrow">01 · Sobre mí</p><h2>Construyendo la base</h2>
+    <div class="about">
+      <p>Soy estudiante de segundo curso de ASIR y estoy dando mis primeros pasos profesionales en el sector IT. Mi objetivo es construir una base sólida en administración de sistemas Linux y Windows, redes e infraestructura.</p>
+      <p>Mi aprendizaje se orienta a la ciberseguridad defensiva: detección de amenazas, análisis de logs, hardening y automatización. Lo practico montando laboratorios propios, como el proyecto <span class="mono">HoneyPot-IDS-IPS</span>, que desarrollo junto a un compañero.</p>
+    </div>
+  </div></section>
+
+  <section id="areas"><div class="wrap">
+    <p class="eyebrow">02 · Áreas técnicas</p><h2>Qué estudio y qué uso</h2>
+    <div class="legend muted" aria-label="Leyenda">
+      {Object.entries(LEVEL_LABEL).map(([k, v]) => <span class={`tag ${k}`}>{v}</span>)}
+    </div>
+    <div class="grid skills">
+      {skills.map((c) => (
+        <div class="card"><h3>{c.category}</h3>
+          {c.items.map((i) => <div class="row"><span>{i.name}</span><span class={`tag ${i.level}`}>{LEVEL_LABEL[i.level]}</span></div>)}
+        </div>
+      ))}
+    </div>
+  </div></section>
+
+  <section id="proyectos"><div class="wrap">
+    <p class="eyebrow">03 · Proyectos</p><h2>Proyectos destacados</h2>
+    <div class="grid">{projects.map((p) => <ProjectCard p={p} />)}</div>
+  </div></section>
+
+  <section id="writeups"><div class="wrap">
+    <p class="eyebrow">04 · Write-ups</p><h2>Notas técnicas</h2>
+    <p class="muted">Laboratorios y análisis documentados paso a paso. <a href={`${base}/writeups/`}>Ver todos →</a></p>
+  </div></section>
+
+  <section id="trayectoria"><div class="wrap">
+    <p class="eyebrow">05 · Trayectoria</p><h2>Formación y experiencia</h2>
+    <div class="line">
+      {events.map((e) => (
+        <div class="ev"><span class="d">{e.date} · {e.kind}</span><h3>{e.title}</h3>
+          {e.place && <p>{e.place}</p>}<p>{e.text}</p></div>
+      ))}
+    </div>
+  </div></section>
+
+  <section id="contacto" class="contact"><div class="wrap">
+    <p class="eyebrow">06 · Contacto</p><h2>Hablemos</h2>
+    <ul>
+      {github && <li><a href={github} rel="noopener noreferrer">GitHub ↗</a></li>}
+      {linkedin && <li><a href={linkedin} rel="noopener noreferrer">LinkedIn ↗</a></li>}
+      {email && <li><a href={`mailto:${email}`}>{email}</a></li>}
+    </ul>
+    {!linkedin && !email && <p class="muted">Añade tu LinkedIn y correo en <code>src/config.ts</code>.</p>}
+  </div></section>
+</Base>

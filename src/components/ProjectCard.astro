@@ -1,0 +1,19 @@
+---
+const { p } = Astro.props;
+const d = p.data;
+const ext = (u?: string) => u && u.startsWith('https://') ? u : undefined;
+---
+<article class="card project">
+  <span class="status">{d.status}</span>
+  <h3>{d.name}</h3>
+  <p class="muted">{d.description}</p>
+  {d.tech.length > 0 && <ul class="tags" aria-label="Tecnologías">{d.tech.map((t: string) => <li class="tag project">{t}</li>)}</ul>}
+  <dl>
+    <dt>PROBLEMA</dt><dd>{d.problem}</dd>
+    <dt>MI CONTRIBUCIÓN</dt><dd>{d.contribution}</dd>
+  </dl>
+  <div class="links">
+    {ext(d.repo) && <a href={ext(d.repo)} rel="noopener noreferrer">Repositorio ↗</a>}
+    {ext(d.docs) && <a href={ext(d.docs)} rel="noopener noreferrer">Documentación ↗</a>}
+  </div>
+</article>

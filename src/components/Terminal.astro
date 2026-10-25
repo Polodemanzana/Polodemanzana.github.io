@@ -1,0 +1,15 @@
+---
+// Panel puramente visual: texto estático, no ejecuta ni acepta comandos.
+const lines: [string, string][] = [
+  ['p', 'whoami'], ['o', 'pol · estudiante ASIR'],
+  ['p', 'cat enfoque.txt'], ['o', 'sistemas · redes · seguridad defensiva'],
+  ['p', 'ls laboratorios/'], ['o', 'honeypot-ids-ips/'],
+  ['p', 'echo $SIGUIENTE_PASO'], ['o', 'seguir aprendiendo en el laboratorio'],
+];
+---
+<div class="term" role="img" aria-label="Panel decorativo con un resumen de enfoque: sistemas, redes y seguridad defensiva">
+  <div class="term-bar" aria-hidden="true"><b></b><b></b><b></b><span>demo visual · solo lectura</span></div>
+  <pre aria-hidden="true">{lines.map(([t, s], i) => (
+    <span class="l" style={`animation-delay:${i * 0.35}s`}>{t === 'p' ? <><span class="p">$ </span>{s}</> : <span class="o">{s}</span>}</span>
+  ))}<span class="p">$ </span><span class="cursor"></span></pre>
+</div>

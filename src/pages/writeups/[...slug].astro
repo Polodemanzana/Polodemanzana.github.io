@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+export async function getStaticPaths() {
+  const posts = (await getCollection('writeups')).filter((p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fmt = new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<Base title={post.data.title} description={post.data.summary}>
+  <div class="wrap"><article class="article">
+    <a href={`${base}/writeups/`}>← Todos los write-ups</a>
+    <p class="mono muted" style="margin-top:1.5rem">{fmt.format(post.data.date)} · {post.data.category}{post.data.demo && ' · EJEMPLO'}</p>
+    <h1>{post.data.title}</h1>
+    <Content />
+  </article></div>
+</Base>
